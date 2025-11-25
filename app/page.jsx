@@ -1,9 +1,9 @@
 
 import Header from '../components/Header';
-import Authors from '../components/Homepage/Authors';
 import BestSeller from '../components/Homepage/BestSeller';
 import Hero from '../components/Homepage/Hero';
-import Recomended from '../components/Homepage/Recomended';
+import Influencors from '../components/Homepage/Influencors';
+import TestimonialsComponentPage from './testimonials-component-01/page';
 
 export default function Home() {
   return (
@@ -11,8 +11,11 @@ export default function Home() {
       <Header></Header>
       <Hero></Hero>
       <BestSeller></BestSeller>
-      <Authors></Authors>
-      <Recomended></Recomended>
+            <Influencors></Influencors>
+      {/* <Authors></Authors> */}
+      {/* <BookQuoteSection></BookQuoteSection> */}
+      {/* <Recomended></Recomended> */}
+      <TestimonialsComponentPage></TestimonialsComponentPage>
     </div>
   );
 }

@@ -3,7 +3,7 @@ import { ShoppingCart, Star } from 'lucide-react';
 const SliderCard = ({ bookname, author, price, img, id, rating }) => {
     return (
         <div className="px-3">
-            <div className=" cursor-pointer bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden group h-full flex flex-col">
+            <div className=" cursor-pointer bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden group h-full flex flex-col my-2">
 
                 <div className="relative overflow-hidden bg-gray-100 flex items-center justify-center p-4" style={{ height: '320px' }}>
                     <img
@@ -64,7 +64,7 @@ const SliderCard = ({ bookname, author, price, img, id, rating }) => {
                                 e.currentTarget.style.backgroundColor = '#eb7c1f';
                             }}
                         >
-                            Add to Cart
+                            View Details
                         </button>
                     </div>
                 </div>

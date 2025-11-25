@@ -109,7 +109,7 @@ const BookCard = ({
           </div>
           <Link href={`/book/${id}`} className="cursor-pointer w-full mt-auto">
             <button className="w-full cursor-pointer border border-[#eb7c1f] text-[#eb7c1f] bg-[#fff6ea] hover:bg-[#eb7c1f] hover:text-white font-semibold py-2.5 sm:py-3 rounded-xl transition-all duration-300 active:scale-95 shadow-sm text-sm sm:text-base">
-              Buy Now
+              View Details
             </button>
           </Link>
         </div>

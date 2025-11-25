@@ -1,5 +1,6 @@
 import Marquee from 'react-fast-marquee';
 import Author from '../Utils/Author';
+import Headings from '../Utils/Headings';
 
 const allAuthors = [
     {
@@ -67,7 +68,7 @@ const allAuthors = [
 const Authors = () => {
     return (
         <div>
-            <p className="heading text-4xl font-bold text-center mt-12 mb-8 text-black">Featured Author</p>
+            <Headings sectionName={'Readers\' Choice'} Title={'Featured Author'} Desc={'Selected for their inspiring work and impact on readers'}></Headings>
             <Marquee style={{width: '80%', margin: '0 auto'}}>
                 <Author name={'Tahmied'} img={'https://res.cloudinary.com/dzkdemrec/image/upload/v1763371043/professional_image_wq1uy5.jpg'}></Author>
                 {
