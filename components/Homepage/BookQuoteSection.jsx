@@ -1,7 +1,7 @@
 
 export default function BookQuoteSection() {
   return (
-    <section className="relative w-[80%] mx-auto h-64 md:h-80 lg:h-96 overflow-hidden rounded-[30px] m-4">
+    <section className="relative w-[80%] mx-auto my-[8rem] h-64 md:h-80 lg:h-96 overflow-hidden rounded-[30px] m-4">
 
       <div 
         className="absolute inset-0 bg-cover bg-center"

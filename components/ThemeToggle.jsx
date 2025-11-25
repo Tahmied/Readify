@@ -62,6 +62,7 @@ const ThemeToggle = ({ isDarkMode, setIsDarkMode }) => {
 const StyledWrapper = styled.div`
   /* The switch - the box around the slider */
   #theme-toggle-button {
+  display:none !important;
     font-size: 17px;
     position: relative;
     display: inline-block;
