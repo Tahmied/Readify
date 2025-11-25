@@ -9,13 +9,13 @@ const BookCard = ({
   img, 
   rating = 4 
 }) => {
-  // Function to render stars based on rating
+ 
   const renderStars = () => {
     const stars = [];
     const fullStars = Math.floor(rating);
     const hasHalfStar = rating % 1 !== 0;
     
-    // Render full stars
+  
     for (let i = 0; i < fullStars; i++) {
       stars.push(
         <svg 
@@ -30,7 +30,6 @@ const BookCard = ({
       );
     }
     
-    // Render half star if needed
     if (hasHalfStar) {
       stars.push(
         <div key="half" className="relative w-3.5 h-3.5 sm:w-4 sm:h-4">
@@ -55,7 +54,6 @@ const BookCard = ({
       );
     }
     
-    // Render empty stars
     const emptyStars = 5 - Math.ceil(rating);
     for (let i = 0; i < emptyStars; i++) {
       stars.push(

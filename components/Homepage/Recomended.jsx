@@ -1,9 +1,13 @@
-import BookCard from "../Utils/BookCard";
+'use client'
+
+import 'swiper/css';
+import 'swiper/css/navigation';
+import { Autoplay, Navigation } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
 import Ctabtn from '../Utils/Ctabtn';
+import SliderCard from "../Utils/SliderCard";
 
 
-
-const BestSeller = () => {
 const books = [
     {
         "_id": "642a1b3f9c1d4a0b8e7f1a01",
@@ -141,28 +145,58 @@ const books = [
         "rating": 4.3
     }
 ]
+const Recomended = () => {
+
     return (
         <section className='best-seller'>
-            <p className="heading text-4xl font-bold text-center mt-12 text-black">Top Sellers</p>
-            <div className="best-books-container max-w-[1300px] mx-auto gap-8 -mb-5">
-                <div className="grid grid-cols-1 max-[425px]:grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 p-4 sm:p-6 lg:p-8 mx-auto max-w-7xl max-[1190px]:grid-cols-2">
+            <p className="heading text-4xl font-bold text-center mt-12 mb-8 text-black">Recomended For You</p>
 
+            <div className="best-books-container max-w-[1300px] mx-auto gap-8 -mb-5 relative px-8">
+
+                <Swiper
+                    modules={[Navigation, Autoplay]}
+                    spaceBetween={10}
+                    slidesPerView={3}
+                    breakpoints={{
+                        0: {
+                            slidesPerView: 1,
+                        },
+                        768: {
+                            slidesPerView: 2,
+                        },
+                        1024: {
+                            slidesPerView: 3,
+                        },
+                    }}
+                    autoplay={{
+                        delay: 2500, 
+                        disableOnInteraction: true, 
+                    }}
+                    loop={true}
+                >
                     {books.map((book) => (
-                        <BookCard
-                            key={book._id}
-                            bookname={book.title}
-                            author={book.author}
-                            price={book.price}
-                            img={book.thumbnail}
-                            id={book._id}
-                            rating={book.rating}
-                        />
+                        <SwiperSlide key={book._id}>
+                            <SliderCard
+                                bookname={book.title}
+                                author={book.author}
+                                price={book.price}
+                                img={book.thumbnail}
+                                id={book._id}
+                                rating={book.rating}
+                            />
+                        </SwiperSlide>
                     ))}
-                </div>
+                </Swiper>
+
+
+
             </div>
-            <Ctabtn text={'All Books'} link={'/books'}></Ctabtn>
+            <div className="cta-container-slider mt-8">
+                <Ctabtn text={'All Books'} link={'/books'}></Ctabtn>
+            </div>
+
         </section>
     );
 };
 
-export default BestSeller;
+export default Recomended;
