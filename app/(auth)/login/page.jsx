@@ -1,5 +1,6 @@
 'use client'
 import { Check, Eye, EyeOff, Lock, Mail } from 'lucide-react';
+import Link from 'next/link';
 import { useState } from 'react';
 
 const Login = () => {
@@ -28,24 +29,24 @@ const Login = () => {
                 {/* Left Side */}
                 <div className="flex-1 bg-[#eb7c1f] text-white p-12 flex flex-col justify-center relative overflow-hidden">
                     <h1 className="text-[32px] font-bold mb-4 relative z-10 max-[375px]:text-[24px] max-[375px]:leading-[28px]">
-                        Unlock Your Learning Adventure!
+                        Unlock a World of Books & Stories
                     </h1>
 
                     <p className="text-base opacity-90 leading-relaxed relative z-10">
-                        Log in to access courses, skill-building resources, and a world of knowledge!
+                        Step into a world of stories, knowledge, and endless inspiration.
                     </p>
                     <ul className="mt-4 space-y-4 relative z-10">
                         <li className="flex items-center">
                             <Check className="mr-3 w-5 h-5" />
-                            <span>Interactive courses across various subjects</span>
+                            <span>Explore thousands of books across all genres</span>
                         </li>
                         <li className="flex items-center">
                             <Check className="mr-3 w-5 h-5" />
-                            <span>Learn at your own pace, anytime, anywhere</span>
+                            <span>Hand-picked titles from top authors</span>
                         </li>
                         <li className="flex items-center">
                             <Check className="mr-3 w-5 h-5" />
-                            <span>Support from expert instructors whenever you need guidance</span>
+                            <span>Discover rare, trending, and must-read books</span>
                         </li>
                     </ul>
                 </div>
@@ -160,9 +161,9 @@ const Login = () => {
                         {/* Sign Up Link */}
                         <div className="text-center mt-8 text-sm text-gray-500">
                             Dont have an account?{' '}
-                            <a href="#" className="text-[#eb7c1f] font-medium hover:underline">
+                            <Link href="/register" className="text-[#eb7c1f] font-medium hover:underline">
                                 Sign up here
-                            </a>
+                            </Link>
                         </div>
                     </form>
                 </div>

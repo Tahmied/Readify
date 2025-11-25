@@ -41,23 +41,23 @@ const Page = () => {
                 {/* Left Side */}
                 <div className="flex-1 bg-[#eb7c1f] text-white p-12 flex flex-col justify-center relative overflow-hidden">
                     <h1 className="text-[32px] font-bold relative z-10 max-[375px]:text-[24px] max-[375px]:leading-[28px]">
-                        Let the Fun Begin!
+                        Join Our Reading Community
                     </h1>
                     <p className="text-base opacity-90 mb-2 leading-relaxed relative z-10">
-                        Register to explore a world full of toys, games, and endless fun!
+                        Create your account to discover new books, save favorites, and enjoy a personalized reading experience.
                     </p>
                     <ul className="mt-2 space-y-4 relative z-10">
                         <li className="flex items-center">
                             <Check className="mr-3 w-5 h-5" />
-                            <span>Magical toy collections</span>
+                            <span>Personalized book recommendations</span>
                         </li>
                         <li className="flex items-center">
                             <Check className="mr-3 w-5 h-5" />
-                            <span>Exclusive deals just for you</span>
+                            <span>Discover stories that inspire and delight</span>
                         </li>
                         <li className="flex items-center">
                             <Check className="mr-3 w-5 h-5" />
-                            <span>Friendly support whenever you need it</span>
+                            <span>Curated collections from top authors</span>
                         </li>
                     </ul>
                 </div>
