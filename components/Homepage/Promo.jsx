@@ -29,7 +29,7 @@ export default function Promo() {
           {promoCards.map((card, idx) => (
             <div
               key={idx}
-              className={`${card.bgColor} rounded-2xl md:p-10 flex flex-col items-center justify-between relative overflow-hidden`}
+              className={`${card.bgColor} rounded-2xl p-10 flex flex-col items-center justify-between relative overflow-hidden`}
             >
               <div className="mb-2">
                 <h2 className="text-white text-3xl md:text-4xl font-bold leading-tight text-center">

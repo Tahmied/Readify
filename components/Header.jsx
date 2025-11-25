@@ -106,214 +106,216 @@ const Header = () => {
     <>
       <style jsx global>{`
         @keyframes slideIn {
-          from {
-            opacity: 0;
-            transform: translateX(50px);
-          }
-          to {
-            opacity: 1;
-            transform: translateX(0);
-          }
-        }
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
 
-        @keyframes dropdownSlideIn {
-          from {
-            opacity: 0;
-            transform: translateY(-10px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-        
-        .mobile-nav-link-animate {
-          animation: slideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-        }
-        
-        .hamburger-line {
-          fill: none;
-          stroke: #3b82f6;
-          stroke-linecap: round;
-          stroke-linejoin: round;
-          stroke-width: 3;
-          transition: stroke-dasharray 600ms cubic-bezier(0.4, 0, 0.2, 1),
-                      stroke-dashoffset 600ms cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .hamburger-line-top-bottom {
-          stroke-dasharray: 12 63;
-        }
-        
-        .hamburger-checked .hamburger-line-top-bottom {
-          stroke-dasharray: 20 300;
-          stroke-dashoffset: -32.42;
-        }
-        
-        body.dark-mode {
-          background: #060606;
-        }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
 
-        body.dark-mode .learnova-header {
-          background: rgb(0 0 0) !important;
-        }
+@keyframes dropdownSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
 
-        body.dark-mode .nav-link-text {
-          color: white !important;
-        }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 
-        /* Dropdown Menu Styles */
-        .profile-wrapper {
-          position: relative;
-        }
+.mobile-nav-link-animate {
+    animation: slideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
 
-        .dropdown-menu {
-          display: block;
-          background: white;
-          border-radius: 12px;
-          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-          min-width: 280px;
-          border: 1px solid #e1e8ed;
-          overflow: hidden;
-          position: absolute;
-          top: 60px;
-          right: 0;
-          z-index: 1001;
-          animation: dropdownSlideIn 0.3s ease-out;
-        }
+.hamburger-line {
+    fill: none;
+    stroke: #eb7c1f;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 3;
+    transition: stroke-dasharray 600ms cubic-bezier(0.4, 0, 0.2, 1),
+        stroke-dashoffset 600ms cubic-bezier(0.4, 0, 0.2, 1);
+}
 
-        .dropdown-header {
-          display: flex;
-          align-items: center;
-          padding: 20px;
-          gap: 12px;
-          background: rgba(59, 130, 246, 0.05);
-        }
+.hamburger-line-top-bottom {
+    stroke-dasharray: 12 63;
+}
 
-        .dropdown-avatar {
-          width: 50px;
-          height: 50px;
-          border-radius: 50%;
-          object-fit: cover;
-          border: 2px solid #3b82f6;
-        }
+.hamburger-checked .hamburger-line-top-bottom {
+    stroke-dasharray: 20 300;
+    stroke-dashoffset: -32.42;
+}
 
-        .user-info {
-          display: flex;
-          flex-direction: column;
-          flex: 1;
-        }
+body.dark-mode {
+    background: #060606;
+}
 
-        .user-name {
-          font-weight: 600;
-          color: #1a1a1a;
-          font-size: 16px;
-          margin-bottom: 4px;
-        }
+body.dark-mode .learnova-header {
+    background: rgb(0 0 0) !important;
+}
 
-        .dropdown-divider {
-          height: 1px;
-          background: #f0f0f0;
-          margin: 0;
-        }
+body.dark-mode .nav-link-text {
+    color: white !important;
+}
 
-        .dropdown-item {
-          display: flex;
-          align-items: center;
-          padding: 16px 20px;
-          color: #333;
-          text-decoration: none;
-          transition: all 0.2s ease;
-          cursor: pointer;
-          border: none;
-          background: none;
-          width: 100%;
-          font-size: 14px;
-          text-align: left;
-        }
+/* Dropdown Menu Styles */
+.profile-wrapper {
+    position: relative;
+}
 
-        .dropdown-item:hover {
-          background: rgba(59, 130, 246, 0.08);
-          color: #3b82f6;
-        }
+.dropdown-menu {
+    display: block;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    min-width: 280px;
+    border: 1px solid #e1e8ed;
+    overflow: hidden;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    z-index: 1001;
+    animation: dropdownSlideIn 0.3s ease-out;
+}
 
-        .dropdown-item:active {
-          background: #3b82f6;
-          color: white;
-        }
+.dropdown-header {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    gap: 12px;
+    background: rgba(59, 130, 246, 0.05);
+}
 
-        .logout-btn {
-          color: #e74c3c;
-        }
+.dropdown-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #eb7c1f;
+}
 
-        .logout-btn:hover {
-          background: #fff5f5 !important;
-          color: #c0392b !important;
-        }
+.user-info {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
 
-        /* Mobile Profile Section */
-        .mobile-profile-section {
-          margin-top: 2rem;
-          width: 100%;
-          position: relative;
-          opacity: 0;
-          transform: translateY(30px);
-          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
+.user-name {
+    font-weight: 600;
+    color: #1a1a1a;
+    font-size: 16px;
+    margin-bottom: 4px;
+}
 
-        .mobile-menu.active .mobile-profile-section {
-          opacity: 1;
-          transform: translateY(0);
-        }
+.dropdown-divider {
+    height: 1px;
+    background: #f0f0f0;
+    margin: 0;
+}
 
-        .mobile-profile-nav {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 12px;
-          padding: 1rem 2rem;
-          background: rgba(59, 130, 246, 0.08);
-          border-radius: 12px;
-          cursor: pointer;
-          transition: all 0.3s ease;
-        }
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    padding: 16px 20px;
+    color: #333;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    border: none;
+    background: none;
+    width: 100%;
+    font-size: 14px;
+    text-align: left;
+}
 
-        .mobile-profile-nav:hover {
-          background: rgba(59, 130, 246, 0.15);
-        }
+.dropdown-item:hover {
+    background: rgba(59, 130, 246, 0.08);
+    color: #eb7c1f;
+}
 
-        .profile-name {
-          font-size: 1.1rem;
-          font-weight: 600;
-          color: #1a1a1a;
-        }
+.dropdown-item:active {
+    background: #eb7c1f;
+    color: white;
+}
 
-        .mobile-profile-section .dropdown-menu {
-          position: relative;
-          top: 12px;
-          right: auto;
-          margin: 12px auto 0;
-          max-width: 100%;
-        }
+.logout-btn {
+    color: #e74c3c;
+}
 
-        @media (max-width: 768px) {
-          .dropdown-menu {
-            min-width: 260px;
-          }
-        }
+.logout-btn:hover {
+    background: #fff5f5 !important;
+    color: #c0392b !important;
+}
 
-        @media (max-width: 480px) {
-          .mobile-profile-section .dropdown-menu {
-            min-width: 100%;
-            width: calc(100% - 2rem);
-          }
-        }
+/* Mobile Profile Section */
+.mobile-profile-section {
+    margin-top: 2rem;
+    width: 100%;
+    position: relative;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
 
-        @media (max-width: 370px) {
-          .dropdown-menu {
-            right: -40px;
-          }
-        }
+.mobile-menu.active .mobile-profile-section {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.mobile-profile-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 1rem 2rem;
+    background: rgba(59, 130, 246, 0.08);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.mobile-profile-nav:hover {
+    background: rgba(59, 130, 246, 0.15);
+}
+
+.profile-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #1a1a1a;
+}
+
+.mobile-profile-section .dropdown-menu {
+    position: relative;
+    top: 12px;
+    right: auto;
+    margin: 12px auto 0;
+    max-width: 100%;
+}
+
+@media (max-width: 768px) {
+    .dropdown-menu {
+        min-width: 260px;
+    }
+}
+
+@media (max-width: 480px) {
+    .mobile-profile-section .dropdown-menu {
+        min-width: 100%;
+        width: calc(100% - 2rem);
+    }
+}
+
+@media (max-width: 370px) {
+    .dropdown-menu {
+        right: -40px;
+    }
+}
       `}</style>
 
       <header className={`learnova-header fixed top-0 left-0 right-0 z-[1000] backdrop-blur-[10px] transition-all duration-300 ${isDarkMode ? 'bg-black/95' : 'bg-white/95'} ${isScrolled ? 'shadow-[0_4px_20px_rgba(0,0,0,0.1)]' : 'shadow-[0_2px_10px_rgba(0,0,0,0.05)]'}`}>
@@ -358,7 +360,7 @@ const Header = () => {
                   <img 
                     src={loggedinUser.photoURL} 
                     alt={loggedinUser.name} 
-                    className="w-[42px] h-[42px] rounded-full object-cover border-2 border-blue-500 transition-all duration-300 hover:border-blue-600" 
+                    className="w-[42px] h-[42px] rounded-full object-cover border-2 border-[#eb7c1f] transition-all duration-300 hover:border-[#eb7c1f]" 
                   />
                 </div>
                 <div 
@@ -368,7 +370,7 @@ const Header = () => {
                   <img 
                     src={loggedinUser.photoURL} 
                     alt={loggedinUser.name} 
-                    className="w-[38px] h-[38px] max-[480px]:w-[35px] max-[480px]:h-[35px] rounded-full object-cover border-2 border-blue-500 transition-all duration-300" 
+                    className="w-[38px] h-[38px] max-[480px]:w-[35px] max-[480px]:h-[35px] rounded-full object-cover border-2 border-[#eb7c1f] transition-all duration-300" 
                   />
                 </div>
                 {isDropdownActive && (
@@ -436,9 +438,9 @@ const Header = () => {
               key={item.name}
               href={item.path}
               className={`mobile-nav-link-animate no-underline text-2xl max-[480px]:text-[1.3rem] font-semibold py-4 px-8 w-full text-center rounded-xl transition-all duration-300 cubic-bezier-[0.4,0,0.2,1] relative
-                after:content-[''] after:absolute after:bottom-2 after:left-1/2 after:-translate-x-1/2 after:w-0 after:h-[2px] after:bg-blue-500 after:transition-all after:duration-300
-                hover:text-blue-500 hover:-translate-x-1 hover:scale-[1.02] hover:after:w-[60%]
-                ${pathname === item.path ? 'text-blue-500 bg-blue-500/8 after:w-[60%]' : isDarkMode ? 'text-white' : 'text-[#1a1a1a]'}`}
+                after:content-[''] after:absolute after:bottom-2 after:left-1/2 after:-translate-x-1/2 after:w-0 after:h-[2px] after:bg-[#eb7c1f] after:transition-all after:duration-300
+                hover:text-[#eb7c1f] hover:-translate-x-1 hover:scale-[1.02] hover:after:w-[60%]
+                ${pathname === item.path ? 'text-[#eb7c1f] bg-[#eb7b1f1d] after:w-[60%]' : isDarkMode ? 'text-white' : 'text-[#1a1a1a]'}`}
               style={{ 
                 animationDelay: isMenuOpen ? `${index * 50 + 100}ms` : '0ms',
                 opacity: isMenuOpen ? 1 : 0,
@@ -461,7 +463,7 @@ const Header = () => {
                 <img 
                   src={loggedinUser.photoURL} 
                   alt={loggedinUser.name} 
-                  className="w-[42px] h-[42px] rounded-full object-cover border-2 border-blue-500" 
+                  className="w-[42px] h-[42px] rounded-full object-cover border-2 border-[#eb7c1f]" 
                 />
                 <span className="profile-name">{loggedinUser.name}</span>
               </div>
@@ -495,7 +497,7 @@ const Header = () => {
           ) : (
             <Link href={'/login'}>
               <button
-                className="flex items-center gap-2 px-7 py-3 bg-white text-blue-500 border-2 border-blue-500 rounded-[50px] text-[0.95rem] font-semibold cursor-pointer whitespace-nowrap transition-all duration-300 hover:bg-blue-500 hover:text-white hover:-translate-y-0.5 hover:shadow-[0_6px_20px_rgba(59,130,246,0.3)] group mt-8"
+                className="flex items-center gap-2 px-7 py-3 bg-white text-[#eb7c1f] border-2 border-[#eb7c1f] rounded-[50px] text-[0.95rem] font-semibold cursor-pointer whitespace-nowrap transition-all duration-300 hover:bg-[#eb7c1f] hover:text-white hover:-translate-y-0.5 hover:shadow-[0_6px_20px_rgba(59,130,246,0.3)] group mt-8"
                 style={{ 
                   transitionDelay: isMenuOpen ? `${navItems.length * 50 + 100}ms` : '0ms',
                   opacity: isMenuOpen ? 1 : 0,
