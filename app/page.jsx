@@ -1,18 +1,16 @@
 
-import Footer from '@/components/footer';
-import Header from '../components/Header';
 import BestSeller from '../components/Homepage/BestSeller';
 import BookQuoteSection from '../components/Homepage/BookQuoteSection';
 import Hero from '../components/Homepage/Hero';
 import Influencors from '../components/Homepage/Influencors';
 import NewsletterComponent from '../components/Homepage/Newsletter';
 import Promo from '../components/Homepage/Promo';
-import TestimonialsComponentPage from './testimonials-component-01/page';
+import TestimonialsComponentPage from '../components/testimonials-component-01/page';
 
 export default function Home() {
   return (
     <div>
-      <Header></Header>
+      
       <Hero></Hero>
       <BestSeller></BestSeller>
       <Promo></Promo>
@@ -22,7 +20,7 @@ export default function Home() {
       {/* <Recomended></Recomended> */}
       <TestimonialsComponentPage></TestimonialsComponentPage>
       <NewsletterComponent></NewsletterComponent>
-      <Footer></Footer>
+     
     </div>
   );
 }

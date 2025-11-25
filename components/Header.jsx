@@ -81,7 +81,7 @@ const Header = () => {
   } else {
     navItems = [
       { name: 'Home', path: '/' },
-      { name: 'All Books', path: '/courses' }
+      { name: 'All Books', path: '/books' }
     ];
   }
 
