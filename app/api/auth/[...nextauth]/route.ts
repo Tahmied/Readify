@@ -55,10 +55,49 @@ export const authOptions: AuthOptions = {
 
     callbacks: {
 
-        async jwt({ token, user }) {
+        async signIn({ user, account }) {
+            if (account?.provider === "google") {
+                try {
+                    const { email, name, image } = user;
+                    await dbConnect();
+
+                    const existingUser = await User.findOne({ email });
+
+                    if (!existingUser) {
+                        await User.create({
+                            name: name,
+                            email: email,
+                            image: image,
+                        });
+                    }
+                    return true;
+                } catch (error) {
+                    console.log("Error saving Google user", error);
+                    return false;
+                }
+            }
+            return true;
+        },
+
+        async jwt({ token, user, account }) {
             if (user) {
-                token.picture = user.image;
-                token.id = user.id;
+
+                if (account?.provider === "google") {
+                    try {
+                        await dbConnect();
+                        const dbUser = await User.findOne({ email: user.email });
+
+                        if (dbUser) {
+                            token.id = dbUser._id.toString();
+                            token.picture = dbUser.image;
+                        }
+                    } catch (error) {
+                        console.log("Error fetching Mongo ID for Google login", error);
+                    }
+                } else {
+                    token.picture = user.image;
+                    token.id = user.id;
+                }
             }
             return token;
         },
@@ -67,7 +106,7 @@ export const authOptions: AuthOptions = {
             if (session.user) {
 
                 session.user.image = token.picture;
-                //session.user.id = token.id
+                session.user.id = token.id as string;
             }
             return session;
         }
