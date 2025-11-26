@@ -2,8 +2,8 @@
 import { Check, Eye, EyeOff, Lock, Mail } from 'lucide-react';
 import { signIn } from 'next-auth/react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { useEffect, useRef, useState } from 'react';
 import Swal from 'sweetalert2';
 
 const Login = () => {
@@ -44,12 +44,32 @@ const Login = () => {
     };
 
     const handleGoogleLogin = () => {
-        signIn('google')
+        signIn('google', { callbackUrl: '/login?login=success' })
     };
 
     const handleTogglePassword = () => {
         setShowPassword(!showPassword);
     };
+    const effectRan = useRef(false);
+
+    const searchParams = useSearchParams()
+    useEffect(() => {
+        if (effectRan.current) return;
+        const isJustLoggedIn = searchParams.get('login') === 'success';
+
+        if (isJustLoggedIn) {
+            Swal.fire({
+                title: 'Login Successfull',
+                text: 'You have been logged in properly',
+                icon: 'success',
+                showConfirmButton: false,
+                timer: 1000
+            }).then(() => {
+                router.push("/")
+            })
+            effectRan.current = true;
+        }
+    }, [searchParams, router]);
 
     return (
         <div className="min-h-screen bg-gray-50 flex items-center justify-center pt-[6rem] p-5">
