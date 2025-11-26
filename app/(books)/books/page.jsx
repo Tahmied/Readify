@@ -1,5 +1,5 @@
-import BookCard from "../../../Components/Utils/BookCard";
-import Headings from "../../../Components/Utils/Headings";
+import BookCard from "../../../components/Utils/BookCard";
+import Headings from "../../../components/Utils/Headings";
 
 const Page = () => {
 const books = [
