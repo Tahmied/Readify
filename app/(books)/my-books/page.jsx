@@ -9,7 +9,7 @@ import { authOptions } from '../../api/auth/[...nextauth]/route';
 const BooksPage = async () => {
     const session = await getServerSession(authOptions)
     await dbConnect()
-    const books = await Book.find({author:session.user.id})
+    const books = await Book.find({ author: session.user.id })
     return (
         <div className="min-h-screen mt-20 bg-gray-50 p-4 sm:p-6 lg:p-8">
             <div className="max-w-7xl mx-auto">
@@ -23,12 +23,15 @@ const BooksPage = async () => {
                             </h1>
                             <p className="text-gray-600 mt-2">Manage your book collection</p>
                         </div>
-                        <button
-                            className="bg-[#eb7c1f] text-white px-6 py-3 rounded-lg font-medium hover:bg-[#d46d1a] transition-colors duration-200 flex items-center justify-center gap-2 shadow-lg cursor-pointer"
-                        >
-                            <Plus size={20} />
-                            Add New Book
-                        </button>
+                        <Link href={'/add-book'}>
+                            <button
+                                className="bg-[#eb7c1f] text-white px-6 py-3 rounded-lg font-medium hover:bg-[#d46d1a] transition-colors duration-200 flex items-center justify-center gap-2 shadow-lg cursor-pointer"
+                            >
+                                <Plus size={20} />
+                                Add New Book
+                            </button>
+                        </Link>
+
                     </div>
                 </div>
 
@@ -89,7 +92,7 @@ const BooksPage = async () => {
                                                 <span className="text-sm">View</span>
                                             </button>
                                         </Link>
-                                        <Link href={`/edit/${book._id}`}>
+                                        <Link href={`/edit-book/${book._id}`}>
                                             <button
                                                 className="flex-1 w-24 bg-gray-100 px-3 py-2 rounded-lg font-medium hover:bg-opacity-20 transition-colors duration-200 flex items-center justify-center gap-1.5 cursor-pointer"
                                                 title="Edit Book"
