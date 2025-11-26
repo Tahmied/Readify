@@ -74,7 +74,6 @@ const Header = () => {
     navItems = [
       { name: 'Home', path: '/' },
       { name: 'All Books', path: '/books' },
-      { name: 'Dashboard', path: '/Dashboard' },
       { name: 'My Books', path: '/my-books' },
     ];
   } else {
@@ -385,12 +384,6 @@ body.dark-mode .nav-link-text {
                       </div>
                     </div>
                     <div className="dropdown-divider"></div>
-                    <Link onClick={menuClicked} href={'/profile'} className="dropdown-item">
-                      <span>My Profile</span>
-                    </Link>
-                    <Link onClick={menuClicked} href={'/edit-profile'} className="dropdown-item">
-                      <span>Edit Profile</span>
-                    </Link>
                     <div className="dropdown-divider"></div>
                     <button onClick={handleLogout} className="dropdown-item logout-btn">
                       <span>Logout</span>
@@ -480,12 +473,6 @@ body.dark-mode .nav-link-text {
                     </div>
                   </div>
                   <div className="dropdown-divider"></div>
-                  <Link onClick={menuClicked} href={'/profile'} className="dropdown-item">
-                    <span>My Profile</span>
-                  </Link>
-                  <Link onClick={menuClicked} href={'/edit-profile'} className="dropdown-item">
-                    <span>Edit Profile</span>
-                  </Link>
                   <div className="dropdown-divider"></div>
                   <button onClick={handleLogout} className="dropdown-item logout-btn">
                     <span>Logout</span>
