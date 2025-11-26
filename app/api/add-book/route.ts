@@ -26,6 +26,7 @@ export async function POST(req: Request) {
             return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
         }
         const userId = session.user.id;
+        const authorImage = session.user.image
 
         const { title, description, coverImage, pageNumber, price, downloadLink, category } = await req.json()
 
@@ -40,6 +41,7 @@ export async function POST(req: Request) {
             description: description,
             coverImage: coverImage,
             author: userId,
+            authorImg: authorImage,
             pageNumber: pageNumber,
             price: price,
             downloadLink: downloadLink,

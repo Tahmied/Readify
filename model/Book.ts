@@ -6,6 +6,7 @@ const bookSchema = new Schema({
     description: { type: String },
     coverImage: { type: String, required: true },
     author: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+    authorImg: { type: String, required: false },
     pageNumber: { type: Number },
     price: { type: Number, required: true },
     downloadLink: { type: String, required: true },
