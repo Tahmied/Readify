@@ -4,30 +4,40 @@ import bcrypt from "bcryptjs";
 
 export async function POST(req: Request) {
     try {
-        await dbConnect()
+        await dbConnect();
 
-        const { name, email, password } = await req.json()
+        const { fullName, email, password, image } = await req.json();
 
-        const existingUser = await User.findOne({ email })
-        if (existingUser) {
-            return new Response(JSON.stringify({ error: "User already exists" }), {
-                status: 400,
-            })
+        if (!fullName || !email || !password) {
+            return Response.json(
+                { error: "Missing required fields" },
+                { status: 400 }
+            );
         }
 
-        const hashedPassword = await bcrypt.hash(password, 10)
+        const existing = await User.findOne({ email });
+        if (existing) {
+            return Response.json(
+                { error: "User already exists" },
+                { status: 409 }
+            );
+        }
+
+        const hashed = await bcrypt.hash(password, 10);
 
         const user = await User.create({
-            name,
+            name: fullName,
             email,
-            password: hashedPassword,
-        })
+            password: hashed,
+            image: image || "",
+        });
 
-        return new Response(JSON.stringify({ message: "User created", user }), {
-            status: 201,
-        })
-    } catch (error) {
-        return new Response(JSON.stringify({ error }), { status: 500 })
+        return Response.json(
+            { message: "User registered successfully", userId: user._id },
+            { status: 201 }
+        );
+    } catch (err) {
+        console.log("REGISTRATION ERROR:", err);
+        return Response.json({ error: "Internal server error" }, { status: 500 });
     }
 }
-

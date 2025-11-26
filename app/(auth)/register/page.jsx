@@ -1,5 +1,7 @@
 'use client'
 import { Check, Eye, EyeOff, Image, Lock, Mail, User } from 'lucide-react';
+import { signIn } from 'next-auth/react';
+import Link from 'next/link';
 import { useState } from 'react';
 
 const Page = () => {
@@ -24,14 +26,44 @@ const Page = () => {
         setShowPassword(!showPassword);
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Registration logic will be added later
-        console.log('Registration submitted', formData);
+        try {
+            const res = await fetch("/api/auth/sign-up", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    fullName: formData.fullName,
+                    email: formData.email,
+                    password: formData.password,
+                    image: formData.photoURL,
+                }),
+            });
+
+            const data = await res.json();
+
+            if (!res.ok) {
+                alert(data.message || "Registration failed");
+                return;
+            }
+
+            await signIn("credentials", {
+                email: formData.email,
+                password: formData.password,
+                image: formData.photoURL,
+                redirect: true,
+                callbackUrl: "/", 
+            });
+
+        } catch (error) {
+            console.error(error);
+            alert("Something went wrong");
+        }
+
     };
 
     const handleGoogleSignup = () => {
-        // Google signup logic will be added later
+        signIn('google')
         console.log('Google signup clicked');
     };
 
@@ -230,9 +262,9 @@ const Page = () => {
                             {/* Login Link */}
                             <div className="text-center mt-8 text-sm text-gray-500">
                                 Already have an account?{' '}
-                                <a href="#" className="text-[#eb7c1f] font-medium hover:underline">
+                                <Link href="/login" className="text-[#eb7c1f] font-medium hover:underline">
                                     Sign in here
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     </div>

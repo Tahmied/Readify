@@ -1,6 +1,8 @@
 'use client'
 import { Check, Eye, EyeOff, Lock, Mail } from 'lucide-react';
+import { signIn } from 'next-auth/react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 const Login = () => {
@@ -8,15 +10,27 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
 
-    const handleLogin = (e) => {
+    const router = useRouter()
+
+    const handleLogin = async (e) => {
         e.preventDefault();
-        // Login logic will be added later
-        console.log('Login submitted');
+
+        const result = await signIn("credentials", {
+            redirect: false,
+            email,
+            password
+        })
+
+        if (result?.error) {
+            console.log("Login failed:", result.error)
+            // You can set an error state here
+        } else {
+            router.push("/") // redirect to home or dashboard
+        }
     };
 
     const handleGoogleLogin = () => {
-        // Google login logic will be added later
-        console.log('Google login clicked');
+        signIn('google')
     };
 
     const handleTogglePassword = () => {

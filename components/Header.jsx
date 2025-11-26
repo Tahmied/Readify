@@ -1,22 +1,22 @@
 'use client';
 
+import { signOut, useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import ThemeToggle from './ThemeToggle';
 
 const Header = () => {
+  const { data: session } = useSession()
+  // console.log(session)
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isDropdownActive, setIsDropdownActive] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const pathname = usePathname();
-
-  const [isLoggedIn, setIsLoggedIn] = useState(false); 
-  const [loggedinUser, setUser] = useState({
-    name: 'John Doe',
-    photoURL: 'https://randomuser.me/api/portraits/men/32.jpg'
-  });
+  const isLoggedIn = !!session
+  const loggedinUser = session?.user
+  console.log(loggedinUser)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -94,7 +94,7 @@ const Header = () => {
   };
 
   const handleLogout = () => {
-    // i'll add logout logic here later
+    signOut()
     setIsDropdownActive(false);
   };
 
@@ -323,10 +323,10 @@ body.dark-mode .nav-link-text {
           {/* Logo */}
           <div className="flex items-center cursor-pointer transition-transform duration-300 hover:scale-105">
             <Link href={'/'}>
-              <img 
-                src={isDarkMode ? "/header/logo-dark.png" : "/header/logo.png"} 
-                alt="mentor" 
-                className="h-[60px] w-auto object-contain md:h-[50px] max-[480px]:h-[45px]" 
+              <img
+                src={isDarkMode ? "/header/logo-dark.png" : "/header/logo.png"}
+                alt="mentor"
+                className="h-[60px] w-auto object-contain md:h-[50px] max-[480px]:h-[45px]"
               />
             </Link>
           </div>
@@ -350,36 +350,36 @@ body.dark-mode .nav-link-text {
           <div className="flex items-center gap-4 md:gap-3 max-[480px]:gap-3">
 
             <ThemeToggle isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />
-            
+
             {isLoggedIn ? (
               <div className="profile-wrapper">
-                <div 
-                  onClick={toggleDropdown} 
+                <div
+                  onClick={toggleDropdown}
                   className="profile-nav cursor-pointer transition-transform duration-300 hover:scale-110 hidden md:flex desktop-profile"
                 >
-                  <img 
-                    src={loggedinUser.photoURL} 
-                    alt={loggedinUser.name} 
-                    className="w-[42px] h-[42px] rounded-full object-cover border-2 border-[#eb7c1f] transition-all duration-300 hover:border-[#eb7c1f]" 
+                  <img
+                    src={loggedinUser.image}
+                    alt={loggedinUser.name}
+                    className="w-[42px] h-[42px] rounded-full object-cover border-2 border-[#eb7c1f] transition-all duration-300 hover:border-[#eb7c1f]"
                   />
                 </div>
-                <div 
+                <div
                   onClick={toggleDropdown}
                   className="profile-nav cursor-pointer transition-transform duration-300 hover:scale-110 md:hidden"
                 >
-                  <img 
-                    src={loggedinUser.photoURL} 
-                    alt={loggedinUser.name} 
-                    className="w-[38px] h-[38px] max-[480px]:w-[35px] max-[480px]:h-[35px] rounded-full object-cover border-2 border-[#eb7c1f] transition-all duration-300" 
+                  <img
+                    src={loggedinUser.image}
+                    alt={loggedinUser.name}
+                    className="w-[38px] h-[38px] max-[480px]:w-[35px] max-[480px]:h-[35px] rounded-full object-cover border-2 border-[#eb7c1f] transition-all duration-300"
                   />
                 </div>
                 {isDropdownActive && (
                   <div className="dropdown-menu">
                     <div className="dropdown-header">
-                      <img 
-                        src={loggedinUser.photoURL || '/assets/usericon.svg'} 
-                        alt="User" 
-                        className="dropdown-avatar" 
+                      <img
+                        src={loggedinUser.image || '/assets/usericon.svg'}
+                        alt="User"
+                        className="dropdown-avatar"
                       />
                       <div className="user-info">
                         <span className="user-name">{loggedinUser.name}</span>
@@ -426,7 +426,7 @@ body.dark-mode .nav-link-text {
         </div>
       </header>
 
-      <div 
+      <div
         className={`fixed top-0 left-0 right-0 bottom-0 z-[998] transition-all duration-[400ms] cubic-bezier-[0.4,0,0.2,1] ${isMenuOpen ? 'bg-black/50 pointer-events-auto' : 'bg-black/0 pointer-events-none'}`}
         onClick={() => setIsMenuOpen(false)}
       />
@@ -441,7 +441,7 @@ body.dark-mode .nav-link-text {
                 after:content-[''] after:absolute after:bottom-2 after:left-1/2 after:-translate-x-1/2 after:w-0 after:h-[2px] after:bg-[#eb7c1f] after:transition-all after:duration-300
                 hover:text-[#eb7c1f] hover:-translate-x-1 hover:scale-[1.02] hover:after:w-[60%]
                 ${pathname === item.path ? 'text-[#eb7c1f] bg-[#eb7b1f1d] after:w-[60%]' : isDarkMode ? 'text-white' : 'text-[#1a1a1a]'}`}
-              style={{ 
+              style={{
                 animationDelay: isMenuOpen ? `${index * 50 + 100}ms` : '0ms',
                 opacity: isMenuOpen ? 1 : 0,
                 transform: isMenuOpen ? 'translateX(0)' : 'translateX(50px)'
@@ -453,28 +453,28 @@ body.dark-mode .nav-link-text {
           ))}
 
           {isLoggedIn ? (
-            <div 
+            <div
               className="mobile-profile-section"
-              style={{ 
+              style={{
                 transitionDelay: isMenuOpen ? `${navItems.length * 50 + 100}ms` : '0ms'
               }}
             >
               <div className="mobile-profile-nav" onClick={toggleDropdown}>
-                <img 
-                  src={loggedinUser.photoURL} 
-                  alt={loggedinUser.name} 
-                  className="w-[42px] h-[42px] rounded-full object-cover border-2 border-[#eb7c1f]" 
+                <img
+                  src={loggedinUser.image}
+                  alt={loggedinUser.name}
+                  className="w-[42px] h-[42px] rounded-full object-cover border-2 border-[#eb7c1f]"
                 />
                 <span className="profile-name">{loggedinUser.name}</span>
               </div>
-              
+
               {isDropdownActive && (
                 <div className="dropdown-menu">
                   <div className="dropdown-header">
-                    <img 
-                      src={loggedinUser.photoURL || '/assets/usericon.svg'} 
-                      alt="User" 
-                      className="dropdown-avatar" 
+                    <img
+                      src={loggedinUser.image || '/assets/usericon.svg'}
+                      alt="User"
+                      className="dropdown-avatar"
                     />
                     <div className="user-info">
                       <span className="user-name">{loggedinUser.name}</span>
@@ -498,7 +498,7 @@ body.dark-mode .nav-link-text {
             <Link href={'/login'}>
               <button
                 className="flex items-center gap-2 px-7 py-3 bg-white text-[#eb7c1f] border-2 border-[#eb7c1f] rounded-[50px] text-[0.95rem] font-semibold cursor-pointer whitespace-nowrap transition-all duration-300 hover:bg-[#eb7c1f] hover:text-white hover:-translate-y-0.5 hover:shadow-[0_6px_20px_rgba(59,130,246,0.3)] group mt-8"
-                style={{ 
+                style={{
                   transitionDelay: isMenuOpen ? `${navItems.length * 50 + 100}ms` : '0ms',
                   opacity: isMenuOpen ? 1 : 0,
                   transform: isMenuOpen ? 'translateY(0)' : 'translateY(30px)'
