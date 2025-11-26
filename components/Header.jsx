@@ -16,7 +16,6 @@ const Header = () => {
   const pathname = usePathname();
   const isLoggedIn = !!session
   const loggedinUser = session?.user
-  console.log(loggedinUser)
 
   useEffect(() => {
     const handleScroll = () => {

@@ -27,6 +27,7 @@ export async function POST(req: Request) {
         }
         const userId = session.user.id;
         const authorImage = session.user.image
+        const authorName = session.user.name
 
         const { title, description, coverImage, pageNumber, price, downloadLink, category } = await req.json()
 
@@ -40,6 +41,7 @@ export async function POST(req: Request) {
             title: title,
             description: description,
             coverImage: coverImage,
+            authorName: authorName,
             author: userId,
             authorImg: authorImage,
             pageNumber: pageNumber,

@@ -1,79 +1,15 @@
 
+import dbConnect from "@/lib/dbConnect";
+import Book from "@/model/Book";
 import { BookOpen, Edit2, Eye, Plus, Trash2 } from 'lucide-react';
+import { getServerSession } from "next-auth";
 import Link from 'next/link';
+import { authOptions } from '../../api/auth/[...nextauth]/route';
 
-const BooksPage = () => {
-    const books = [
-        {
-            _id: "692689fb20cb4036328e45c4",
-            title: "Thinking Machines",
-            description: "A comprehensive guide to understanding artificial intelligence and machine learning concepts.",
-            coverImage: "https://res.cloudinary.com/dzkdemrec/image/upload/v1764130680/Thinking_Machines_jsavdi.png",
-            author: "692679ffe0a4f45585796c2b",
-            authorImg: "https://res.cloudinary.com/dzkdemrec/image/upload/v1761282186/3266b476-4eb4-449e-a2d5-87a877c3c9d1_imyer4.jpg",
-            pageNumber: 513,
-            price: 100,
-            downloadLink: "drive.google.com/abook.pdf",
-            category: "self improvement",
-            avgRating: 1.5,
-            downloadCount: 8000,
-            status: "published",
-            createdAt: "2025-11-26T05:02:51.551Z",
-            slug: "thinking-machines"
-        },
-        {
-            _id: "692689fb20cb4036328e45c5",
-            title: "The Design of Everyday Things",
-            description: "A powerful exploration of design principles and human psychology in everyday objects.",
-            coverImage: "https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400&h=600&fit=crop",
-            author: "692679ffe0a4f45585796c2c",
-            authorImg: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop",
-            pageNumber: 368,
-            price: 29.99,
-            downloadLink: "drive.google.com/design.pdf",
-            category: "design",
-            avgRating: 4.5,
-            downloadCount: 12500,
-            status: "published",
-            createdAt: "2025-11-25T10:30:00.000Z",
-            slug: "design-everyday-things"
-        },
-        {
-            _id: "692689fb20cb4036328e45c6",
-            title: "Atomic Habits",
-            description: "An easy and proven way to build good habits and break bad ones through tiny changes.",
-            coverImage: "https://images.unsplash.com/photo-1589829085413-56de8ae18c73?w=400&h=600&fit=crop",
-            author: "692679ffe0a4f45585796c2d",
-            authorImg: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop",
-            pageNumber: 320,
-            price: 24.99,
-            downloadLink: "drive.google.com/habits.pdf",
-            category: "self improvement",
-            avgRating: 4.8,
-            downloadCount: 25000,
-            status: "published",
-            createdAt: "2025-11-24T08:15:00.000Z",
-            slug: "atomic-habits"
-        },
-        {
-            _id: "692689fb20cb4036328e45c7",
-            title: "Deep Work",
-            description: "Rules for focused success in a distracted world and achieving peak productivity.",
-            coverImage: "https://images.unsplash.com/photo-1532012197267-da84d127e765?w=400&h=600&fit=crop",
-            author: "692679ffe0a4f45585796c2e",
-            authorImg: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop",
-            pageNumber: 296,
-            price: 19.99,
-            downloadLink: "drive.google.com/deepwork.pdf",
-            category: "productivity",
-            avgRating: 4.6,
-            downloadCount: 18000,
-            status: "published",
-            createdAt: "2025-11-23T14:20:00.000Z",
-            slug: "deep-work"
-        }
-    ]
-
+const BooksPage = async () => {
+    const session = await getServerSession(authOptions)
+    await dbConnect()
+    const books = await Book.find({author:session.user.id})
     return (
         <div className="min-h-screen mt-20 bg-gray-50 p-4 sm:p-6 lg:p-8">
             <div className="max-w-7xl mx-auto">
@@ -146,7 +82,7 @@ const BooksPage = () => {
                                     <div className="flex gap-2">
                                         <Link href={`/book/${book._id}`}>
                                             <button
-                                                className= "flex-1 bg-[#eb7c1f] text-white w-24 px-3 py-2 rounded-lg font-medium hover:bg-gray-200 transition-colors duration-200 flex items-center justify-center gap-1.5 cursor-pointer hover:text-black"
+                                                className="flex-1 bg-[#eb7c1f] text-white w-24 px-3 py-2 rounded-lg font-medium hover:bg-gray-200 transition-colors duration-200 flex items-center justify-center gap-1.5 cursor-pointer hover:text-black"
                                                 title="View Details"
                                             >
                                                 <Eye size={16} />

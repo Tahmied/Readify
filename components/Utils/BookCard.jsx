@@ -7,10 +7,10 @@ const BookCard = ({
   originalPrice, 
   id, 
   img, 
-  rating = 4 
+  rating
 }) => {
  
-  const renderStars = () => {
+  const renderStars = (rating) => {
     const stars = [];
     const fullStars = Math.floor(rating);
     const hasHalfStar = rating % 1 !== 0;
@@ -91,7 +91,7 @@ const BookCard = ({
               By {author}
             </p>
             <div className="flex items-center gap-1 mb-3 sm:mb-4">
-              {renderStars()}
+              {renderStars(rating)}
               <span className="text-slate-600 text-xs sm:text-sm ml-1 font-medium">
                 ({rating})
               </span>
