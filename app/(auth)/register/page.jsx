@@ -2,9 +2,12 @@
 import { Check, Eye, EyeOff, Image, Lock, Mail, User } from 'lucide-react';
 import { signIn } from 'next-auth/react';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { useEffect, useRef, useState } from 'react';
+import Swal from 'sweetalert2';
 
 const Page = () => {
+    const router = useRouter()
     const [formData, setFormData] = useState({
         fullName: '',
         email: '',
@@ -51,10 +54,17 @@ const Page = () => {
                 email: formData.email,
                 password: formData.password,
                 image: formData.photoURL,
-                redirect: true,
-                callbackUrl: "/", 
+                redirect: false
             });
-
+            Swal.fire({
+                title: 'Registration Successful!',
+                text: 'Your account has been created successfully',
+                icon: 'success',
+                showConfirmButton: false,
+                timer: 1000
+            }).then(() => {
+                router.push("/")
+            })
         } catch (error) {
             console.error(error);
             alert("Something went wrong");
@@ -63,14 +73,37 @@ const Page = () => {
     };
 
     const handleGoogleSignup = () => {
-        signIn('google')
+        signIn('google', { callbackUrl: '/register?register=success' })
         console.log('Google signup clicked');
     };
+
+    const effectRan = useRef(false);
+
+    const searchParams = useSearchParams()
+    useEffect(() => {
+        if (effectRan.current) return;
+        const isJustLoggedIn = searchParams.get('register') === 'success';
+
+        if (isJustLoggedIn) {
+            Swal.fire({
+                title: 'Registration Successful!',
+                text: 'Your account has been created successfully',
+                icon: 'success',
+                showConfirmButton: false,
+                timer: 1000
+            }).then(() => {
+                router.push("/")
+            })
+            effectRan.current = true;
+        }
+    }, [searchParams, router]);
+
+
 
     return (
         <div className="min-h-screen bg-gray-50 flex items-center justify-center pt-[6rem] p-5">
             <div className="flex w-full max-w-[950px] min-h-[580px] bg-white rounded-2xl overflow-hidden shadow-[0_15px_40px_rgba(0,0,0,0.08)]">
-                {/* Left Side */}
+
                 <div className="flex-1 bg-[#eb7c1f] text-white p-12 flex flex-col justify-center relative overflow-hidden">
                     <h1 className="text-[32px] font-bold relative z-10 max-[375px]:text-[24px] max-[375px]:leading-[28px]">
                         Join Our Reading Community
@@ -94,7 +127,6 @@ const Page = () => {
                     </ul>
                 </div>
 
-                {/* Right Side */}
                 <div className="flex-1 p-12 flex flex-col justify-center">
                     <div className="mb-9">
                         <h2 className="text-[28px] font-bold text-gray-800 mb-2 max-[375px]:text-[24px] max-[375px]:leading-[28px]">Create Account</h2>
@@ -104,8 +136,8 @@ const Page = () => {
                     </div>
 
                     <div className=" overflow-y-auto pr-2">
-                        <div onSubmit={handleSubmit}>
-                            {/* Full Name Field */}
+                        <form onSubmit={handleSubmit}>
+
                             <div className="mb-5">
                                 <label htmlFor="fullName" className="block mb-2 font-medium text-gray-600 text-sm">
                                     Full Name
@@ -125,7 +157,6 @@ const Page = () => {
                                 </div>
                             </div>
 
-                            {/* Email Field */}
                             <div className="mb-5">
                                 <label htmlFor="email" className="block mb-2 font-medium text-gray-600 text-sm">
                                     Email Address
@@ -145,7 +176,6 @@ const Page = () => {
                                 </div>
                             </div>
 
-                            {/* Photo URL Field */}
                             <div className="mb-5">
                                 <label htmlFor="photoURL" className="block mb-2 font-medium text-gray-600 text-sm">
                                     Photo URL
@@ -165,7 +195,6 @@ const Page = () => {
                                 </div>
                             </div>
 
-                            {/* Password Field */}
                             <div className="mb-5">
                                 <label htmlFor="password" className="block mb-2 font-medium text-gray-600 text-sm">
                                     Password
@@ -192,7 +221,6 @@ const Page = () => {
                                 </div>
                             </div>
 
-                            {/* Terms Checkbox */}
                             <div className="mb-6 flex items-start gap-2">
                                 <input
                                     type="checkbox"
@@ -215,22 +243,22 @@ const Page = () => {
                                 </label>
                             </div>
 
-                            {/* Register Button */}
                             <button
                                 type="submit"
-                                onClick={handleSubmit}
                                 className="w-full py-4 bg-[#eb7c1f] text-white rounded-lg text-base font-semibold cursor-pointer transition-all shadow-[0_4px_12px_rgba(235,124,31,0.3)] hover:bg-[#d66f1a] hover:-translate-y-0.5 active:translate-y-0"
                             >
                                 Create Account
                             </button>
 
-                            {/* Divider */}
+
+
+
+
                             <div className="text-center my-8 relative text-gray-400 text-sm">
                                 <div className="absolute top-1/2 left-0 right-0 h-[1px] bg-gray-200"></div>
                                 <span className="bg-white px-4 relative z-10">Or sign up with</span>
                             </div>
 
-                            {/* Google Signup */}
                             <div className="flex gap-4">
                                 <button
                                     type="button"
@@ -259,19 +287,18 @@ const Page = () => {
                                 </button>
                             </div>
 
-                            {/* Login Link */}
                             <div className="text-center mt-8 text-sm text-gray-500">
                                 Already have an account?{' '}
                                 <Link href="/login" className="text-[#eb7c1f] font-medium hover:underline">
                                     Sign in here
                                 </Link>
                             </div>
-                        </div>
+                        </form>
+
+
                     </div>
                 </div>
             </div>
-
-            {/* Mobile Responsive Styles */}
             <style>{`
                 @media (max-width: 768px) {
                     .flex.w-full.max-w-\\[950px\\] {
