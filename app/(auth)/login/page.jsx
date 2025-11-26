@@ -4,6 +4,7 @@ import { signIn } from 'next-auth/react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import Swal from 'sweetalert2';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -23,9 +24,22 @@ const Login = () => {
 
         if (result?.error) {
             console.log("Login failed:", result.error)
-            // You can set an error state here
+            Swal.fire({
+                title: 'Login Faild',
+                text: 'Account is not registered or wrong email/pass',
+                icon: 'error',
+                showConfirmButton: 'false'
+            });
         } else {
-            router.push("/") // redirect to home or dashboard
+            Swal.fire({
+                title: 'Login Successfull',
+                text: 'You have been logged in properly',
+                icon: 'success',
+                showConfirmButton: false,
+                timer: 1000
+            }).then(() => {
+                router.push("/")
+            })
         }
     };
 
