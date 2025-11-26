@@ -5,7 +5,7 @@ const bookSchema = new Schema({
     slug: { type: String, unique: true },
     description: { type: String },
     coverImage: { type: String, required: true },
-    author: { type: String, required: true },
+    author: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
     pageNumber: { type: Number },
     price: { type: Number, required: true },
     downloadLink: { type: String, required: true },

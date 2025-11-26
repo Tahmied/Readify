@@ -1,6 +1,8 @@
 import dbConnect from "@/lib/dbConnect"
 import Book from "@/model/Book"
-import User from "@/model/User"
+import { getServerSession } from "next-auth"
+import { NextResponse } from "next/server"
+import { authOptions } from "../auth/[...nextauth]/route"
 
 function generateBookStats() {
     const steps = [0, 0.5]
@@ -18,23 +20,26 @@ function generateBookStats() {
 export async function POST(req: Request) {
     try {
         await dbConnect()
-        const { title, description, coverImage, userId, pageNumber, price, downloadLink, category } = await req.json()
 
-        if ([title, description, coverImage, price, downloadLink, category, pageNumber, userId].some((e) => !e)) {
+        const session = await getServerSession(authOptions);
+        if (!session || !session.user) {
+            return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+        }
+        const userId = session.user.id;
+
+        const { title, description, coverImage, pageNumber, price, downloadLink, category } = await req.json()
+
+        if ([title, description, coverImage, price, downloadLink, category, pageNumber].some((e) => !e)) {
             throw new Error("These are required fields");
         }
 
-        const writter = await User.findById(userId)
-        if (!writter) {
-            throw new Error('No user found')
-        }
         const { avgRating, downloadCount } = generateBookStats()
 
         const book = await Book.create({
             title: title,
             description: description,
             coverImage: coverImage,
-            author: writter,
+            author: userId,
             pageNumber: pageNumber,
             price: price,
             downloadLink: downloadLink,
