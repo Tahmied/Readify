@@ -2,9 +2,9 @@ import dbConnect from "@/lib/dbConnect"
 import Book from "@/model/Book"
 import { NextRequest } from "next/server"
 
-export async function GET(req: NextRequest,
-    { params }: { params: { id: string } }) {
-    const { id } = params
+export async function GET(request: NextRequest,
+    { params }: { params: Promise<{ id: string }> }) {
+    const { id } = await params
     console.log(id)
     try {
         await dbConnect()
