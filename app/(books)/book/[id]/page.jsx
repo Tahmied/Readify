@@ -1,7 +1,7 @@
 
 const page = async ({params}) => {
     const {id} = await params
-    console.log(params)
+    console.log(id)
     return (
         <div>
             <h1 className="h-screen mt-32 text-black text-8xl">Dynamic Id {id}</h1>
