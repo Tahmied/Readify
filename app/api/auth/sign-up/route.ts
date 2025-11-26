@@ -14,6 +14,7 @@ export async function POST(req: Request) {
                 { status: 400 }
             );
         }
+        console.log(fullName, email, password, image)
 
         const existing = await User.findOne({ email });
         if (existing) {
@@ -31,6 +32,7 @@ export async function POST(req: Request) {
             password: hashed,
             image: image || "",
         });
+        console.log(user);
 
         return Response.json(
             { message: "User registered successfully", userId: user._id },

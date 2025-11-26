@@ -203,7 +203,7 @@ const Page = () => {
                                     required
                                     className="mt-1 w-4 h-4 accent-[#eb7c1f] cursor-pointer"
                                 />
-                                <label htmlFor="terms" className="text-sm text-gray-600 cursor-pointer">
+                                <label htmlFor="terms" className="text-sm text-gray-600 cursor-pointer" required>
                                     I agree to the{' '}
                                     <a href="#" className="text-[#eb7c1f] hover:underline">
                                         Terms of Service
