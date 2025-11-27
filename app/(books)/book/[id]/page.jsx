@@ -3,6 +3,28 @@ import Book from "@/model/Book";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+export async function generateMetadata({ params }) {
+  const { id } = await params;
+
+  await dbConnect();
+  const book = await Book.findById(id).lean();
+
+  if (!book) {
+    return {
+      title: "Book Not Found",
+      description: "The requested book could not be found."
+    };
+  }
+
+  return {
+    title: book.title,
+    description: book.description.substring(0, 160),
+    openGraph: {
+      images: [book.coverImage],
+    },
+  };
+}
+
 const page = async ({ params }) => {
   const { id } = await params;
 

@@ -6,6 +6,11 @@ import { getServerSession } from "next-auth";
 import Link from 'next/link';
 import { authOptions } from '../../api/auth/[...nextauth]/route';
 
+export const metadata = {
+  title: "My Books - Readify",
+  description: "View and modify your books",
+};
+
 const BooksPage = async () => {
     const session = await getServerSession(authOptions)
     await dbConnect()

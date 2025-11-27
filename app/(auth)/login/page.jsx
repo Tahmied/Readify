@@ -3,8 +3,9 @@ import { Check, Eye, EyeOff, Lock, Mail } from 'lucide-react';
 import { signIn } from 'next-auth/react';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useEffect, useRef, useState } from 'react';
+import { Suspense, useEffect, useRef, useState } from 'react';
 import Swal from 'sweetalert2';
+
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -230,4 +231,12 @@ const Login = () => {
     );
 };
 
-export default Login;
+const LoginForm = () => {
+    return (
+        <Suspense fallback={<div>Loading...</div>}>
+            <Login></Login>
+        </Suspense>
+    )
+}
+
+export default LoginForm;

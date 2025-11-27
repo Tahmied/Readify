@@ -3,6 +3,11 @@ import Book from "@/model/Book";
 import Headings from "../../../components/Utils/Headings";
 import BooksFilter from "./BooksFilter.jsx";
 
+export const metadata = {
+  title: "All Book - Readify",
+  description: "Browser our complete collection",
+};
+
 const Page = async () => {
   await dbConnect();
   const booksData = await Book.find().lean(); 
