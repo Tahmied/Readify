@@ -1,36 +1,173 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 📚 Book Store Platform
 
-## Getting Started
+A modern, full-featured book store platform built with Next.js, featuring a beautiful UI, secure authentication, and comprehensive book management capabilities.
 
-First, run the development server:
+## ✨ Features
 
+### 🔐 Authentication System
+- **NextAuth Integration** - Secure authentication powered by NextAuth.js
+- **Multiple Login Methods**:
+  - Google OAuth authentication
+  - Email and password credentials
+- **User Registration** - Easy sign-up process for new users
+- **Secure Sessions** - Protected routes and user data
+
+### 📖 Book Management
+- **Browse Books** - Beautiful landing page displaying all available books and site informations
+- **My Books Dashboard** - Personal collection of published books
+- **Add New Books** - Intuitive form to publish new books
+- **Edit Books** - Update book information anytime
+- **Book Details Page** - Comprehensive view including:
+  - Book description
+  - Reviews and ratings
+  - Page count
+  - Pricing information
+  - "Read Now" button linking to the book
+
+### 🎨 User Interface
+- Modern, responsive design
+- Clean and intuitive navigation
+- Optimized for all devices
+
+##  Getting Started
+
+### Prerequisites
+
+- Node.js 18+ installed
+- npm or yarn package manager
+- A database (PostgreSQL, MySQL, or MongoDB)
+- Google OAuth credentials (for Google login)
+
+### Installation
+
+1. Clone the repository:
+```bash
+git clone https://github.com/Tahmied/Readify.git
+cd bookstore-platform
+```
+
+2. Install dependencies:
+```bash
+npm install
+# or
+yarn install
+```
+
+3. Set up environment variables:
+
+Create a `.env.local` file in the root directory:
+
+```env
+# Database
+MONGODB_URI ="your-database-url"
+
+# NextAuth
+NEXTAUTH_URL="http://localhost:3000"
+AUTH_SECRET="your-secret-key"
+
+# Google OAuth
+GOOGLE_CLIENT_ID="your-google-client-id"
+GOOGLE_CLIENT_SECRET="your-google-client-secret"
+```
+
+4. Start the development server:
 ```bash
 npm run dev
 # or
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+6. Open [http://localhost:3000](http://localhost:3000) in your browser
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📁 Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+bookstore-platform/
+├── app/
+│   ├── (auth)/
+│   │   ├── login/
+│   │   └── register/
+│   ├── books/
+│   │   ├── [id]/
+│   │   └── my-books/
+│   ├── api/
+│   │   └── auth/
+│   └── page.tsx
+├── components/
+│   ├── BookCard.tsx
+│   ├── BookDetails.tsx
+│   └── Navbar.tsx
+├── lib/
+│   ├── auth.ts
+│   └── db.ts
+├── public/
+└── package.json
+```
 
-## Learn More
+## 🛠️ Built With
 
-To learn more about Next.js, take a look at the following resources:
+- **[Next.js](https://nextjs.org/)** - React framework for production
+- **[NextAuth.js](https://next-auth.js.org/)** - Authentication for Next.js
+- **[Tailwind CSS](https://tailwindcss.com/)** - Utility-first CSS framework
+- **[Prisma](https://www.prisma.io/)** / **[MongoDB](https://www.mongodb.com/)** - Database ORM
+- **React** - UI library
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📄 Pages
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Public Pages
+- `/` - Home page 
+- `/book/[id]` - Individual book details page
+- `/login` - User login page
+- `/register` - New user registration
+- `/books` - All Books
 
-## Deploy on Vercel
+### Protected Pages (Requires Authentication)
+- `/books/my-books` - User's published books
+- `/books/add-book` - Add new book form
+- `/books/edit-book/[id]` - Edit existing book
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🔑 Key Functionalities
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Book Details Include:
+- Title and author information
+- Cover image
+- Description
+- Number of pages
+- User ratings and reviews
+- Price
+- "Read Now" button with external link
+
+### User Dashboard Features:
+- View all personally published books
+- Quick access to add new books
+- Edit existing book entries
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1. Fork the project
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 📝 License
+
+This project is licensed under the MIT License.
+
+## 👤 Author
+
+Your Name
+- GitHub: [@Tahmied](https://github.com/Tahmied)
+- Email: contact@tahmied.com
+
+## 🙏 Acknowledgments
+
+- Next.js team for the amazing framework
+- NextAuth.js for seamless authentication
+- The open-source community
+
+## 📧 Support
+
+For support, email contact@tahmied.com or open an issue in the repository.
