@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function Promo() {
   const promoCards = [
@@ -6,19 +7,22 @@ export default function Promo() {
       title: "New Release",
       bgColor: "bg-teal-500",
       buttonColor: "bg-teal-700 hover:bg-teal-800",
-      imgSrc: "https://covers.openlibrary.org/b/id/8432047-L.jpg"
+      imgSrc: "https://res.cloudinary.com/dzkdemrec/image/upload/v1764204287/in_the_fog_gh0tn0.jpg",
+      link: '/book/69279f18bf04329737faec68'
     },
     {
       title: "Popular",
       bgColor: "bg-blue-900",
       buttonColor: "bg-blue-600 hover:bg-blue-700",
-      imgSrc: "https://covers.openlibrary.org/b/id/7222246-L.jpg"
+      imgSrc: "https://res.cloudinary.com/dzkdemrec/image/upload/v1764204137/eye_pburnk.jpg",
+      link: '/book/69279e8fbf04329737faec62'
     },
     {
       title: "Top Rated",
       bgColor: "bg-red-400",
       buttonColor: "bg-red-500 hover:bg-red-600",
-      imgSrc: "https://covers.openlibrary.org/b/id/12657287-L.jpg"
+      imgSrc: "https://res.cloudinary.com/dzkdemrec/image/upload/v1764203938/the_sentient_code_pdmrcz.jpg",
+      link: '/book/69279db5bf04329737faec50'
     }
   ];
 
@@ -44,17 +48,19 @@ export default function Promo() {
                     alt={card.title}
                     fill
                     className="object-cover"
-                    unoptimized
                   />
                 </div>
               </div>
 
               <div className='cursor-pointer'>
-                <button
-                  className={`${card.buttonColor} text-white px-8 py-3 rounded-lg font-medium transition-colors duration-200 mx-auto cursor-pointer`}
-                >
-                  Shop Now
-                </button>
+                <Link href={card.link}>
+                  <button
+                    className={`${card.buttonColor} text-white px-8 py-3 rounded-lg font-medium transition-colors duration-200 mx-auto cursor-pointer`}
+                  >
+                    Shop Now
+                  </button>
+                </Link>
+
               </div>
             </div>
           ))}
