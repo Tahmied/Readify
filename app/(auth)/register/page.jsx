@@ -3,7 +3,7 @@ import { Check, Eye, EyeOff, Image, Lock, Mail, User } from 'lucide-react';
 import { signIn } from 'next-auth/react';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useEffect, useRef, useState } from 'react';
+import { Suspense, useEffect, useRef, useState } from 'react';
 import Swal from 'sweetalert2';
 
 const Page = () => {
@@ -330,4 +330,13 @@ const Page = () => {
     );
 };
 
-export default Page;
+const Register = () => {
+    return(
+        <Suspense fallback={<div>Loading...</div>}>
+            <Page></Page>
+        </Suspense>
+
+    )
+}
+
+export default Register;
