@@ -14,7 +14,12 @@ const bookSchema = new Schema({
     category: { type: String, required: true },
     avgRating: { type: Number, default: 0 },
     downloadCount: { type: Number, default: 0 },
-    status: { type: String, enum: ["draft", "published"], default: "published" }
+    status: { type: String, enum: ["draft", "published"], default: "published" },
+    uploaderIp: {
+        type: String,
+        required: false,
+        select: false
+    },
 }, {
     timestamps: true
 });

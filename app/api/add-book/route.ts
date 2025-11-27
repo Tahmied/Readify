@@ -35,6 +35,10 @@ export async function POST(req: Request) {
             throw new Error("These are required fields");
         }
 
+        const forwardedFor = req.headers.get("x-forwarded-for");
+        const ip = forwardedFor ? forwardedFor.split(',')[0] : "127.0.0.1";
+        const theIp = ip.trim()
+
         const { avgRating, downloadCount } = generateBookStats()
 
         const book = await Book.create({
@@ -50,7 +54,8 @@ export async function POST(req: Request) {
             category: category,
             avgRating: avgRating,
             downloadCount: downloadCount,
-            status: 'published'
+            status: 'published',
+            uploaderIp: theIp
         })
 
         return Response.json(
