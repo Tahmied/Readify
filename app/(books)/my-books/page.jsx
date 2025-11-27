@@ -1,10 +1,11 @@
 
 import dbConnect from "@/lib/dbConnect";
 import Book from "@/model/Book";
-import { BookOpen, Edit2, Eye, Plus, Trash2 } from 'lucide-react';
+import { BookOpen, Edit2, Eye, Plus } from 'lucide-react';
 import { getServerSession } from "next-auth";
 import Link from 'next/link';
 import { authOptions } from '../../api/auth/[...nextauth]/route';
+import DeleteBtn from "./DeleteBtn";
 
 export const metadata = {
   title: "My Books - Readify",
@@ -109,13 +110,7 @@ const BooksPage = async () => {
                                                 <span className="text-sm text-black">Edit</span>
                                             </button>
                                         </Link>
-
-                                        <button
-                                            className="bg-red-50 text-red-600 px-3 py-2 rounded-lg font-medium hover:bg-red-100 transition-colors duration-200 flex items-center justify-center cursor-pointer"
-                                            title="Delete Book"
-                                        >
-                                            <Trash2 size={16} />
-                                        </button>
+                                        <DeleteBtn id={book._id.toString()}></DeleteBtn>
                                     </div>
                                 </div>
                             </div>
