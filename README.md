@@ -82,26 +82,49 @@ yarn dev
 ## 📁 Project Structure
 
 ```
-bookstore-platform/
+readify/
 ├── app/
 │   ├── (auth)/
 │   │   ├── login/
 │   │   └── register/
-│   ├── books/
-│   │   ├── [id]/
+│   ├── (books)/
+│   │   ├── add-book/
+│   │   ├── book/
+│   │   ├── books/
+│   │   ├── edit-book/[id]/
 │   │   └── my-books/
 │   ├── api/
-│   │   └── auth/
-│   └── page.tsx
+│   ├── globals.css
+│   ├── layout.tsx
+│   ├── page.jsx
+│   └── proviers.jsx
 ├── components/
-│   ├── BookCard.tsx
-│   ├── BookDetails.tsx
-│   └── Navbar.tsx
+│   ├── Homepage/
+│   ├── shadcn-studio/
+│   ├── testimonials-component-01/
+│   ├── ui/
+│   └── Utils/
+│       ├── footer.tsx
+│       ├── Header.jsx
+│       └── ThemeToggle.jsx
 ├── lib/
-│   ├── auth.ts
-│   └── db.ts
+│   ├── dbConnect.ts
+│   └── utils.ts
+├── model/
+│   ├── Book.ts
+│   └── User.ts
 ├── public/
-└── package.json
+├── .env
+├── .gitignore
+├── components.json
+├── eslint.config.mjs
+├── middleware.ts
+├── next-auth.d.ts
+├── next.config.ts
+├── package.json
+├── postcss.config.mjs
+├── README.md
+└── tsconfig.json
 ```
 
 ## 🛠️ Built With
