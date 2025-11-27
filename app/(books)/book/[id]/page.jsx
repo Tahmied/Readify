@@ -210,8 +210,8 @@ const page = async ({ params }) => {
                 </Link>
 
 
-                <p className="text-slate-500 text-xs sm:text-sm text-center">
-                  Instant download after purchase • Published {formatDate(book.createdAt)}
+                <p className="text-slate-500 mt-4 text-xs sm:text-sm text-center">
+                  It Will Take you to the download page • Published {formatDate(book.createdAt)}
                 </p>
               </div>
             </div>
