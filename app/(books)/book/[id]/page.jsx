@@ -5,10 +5,11 @@ import { notFound } from "next/navigation";
 
 const page = async ({ params }) => {
   const { id } = await params;
-  
+
   await dbConnect();
   const book = await Book.findById(id).lean();
-  
+  console.log(book);
+
   if (!book) {
     notFound();
   }
@@ -27,10 +28,10 @@ const page = async ({ params }) => {
 
     for (let i = 0; i < fullStars; i++) {
       stars.push(
-        <svg 
+        <svg
           key={`full-${i}`}
-          xmlns="http://www.w3.org/2000/svg" 
-          viewBox="0 0 24 24" 
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
           fill="#f59e0b"
           className="w-5 h-5"
         >
@@ -42,17 +43,17 @@ const page = async ({ params }) => {
     if (hasHalfStar) {
       stars.push(
         <div key="half" className="relative w-5 h-5">
-          <svg 
-            xmlns="http://www.w3.org/2000/svg" 
-            viewBox="0 0 24 24" 
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
             fill="#e2e8f0"
             className="absolute inset-0 w-full h-full"
           >
             <path fillRule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clipRule="evenodd" />
           </svg>
-          <svg 
-            xmlns="http://www.w3.org/2000/svg" 
-            viewBox="0 0 24 24" 
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
             fill="#f59e0b"
             className="absolute inset-0 w-full h-full"
             style={{ clipPath: 'inset(0 50% 0 0)' }}
@@ -66,10 +67,10 @@ const page = async ({ params }) => {
     const emptyStars = 5 - Math.ceil(rating);
     for (let i = 0; i < emptyStars; i++) {
       stars.push(
-        <svg 
+        <svg
           key={`empty-${i}`}
-          xmlns="http://www.w3.org/2000/svg" 
-          viewBox="0 0 24 24" 
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
           fill="#e2e8f0"
           className="w-5 h-5"
         >
@@ -84,16 +85,16 @@ const page = async ({ params }) => {
   return (
     <div className="min-h-screen mt-20 bg-gradient-to-b from-orange-50/30 to-white py-8 sm:py-12 px-3 sm:px-4 md:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
-        <Link 
+        <Link
           href="/books"
           className="inline-flex items-center gap-2 text-slate-600 hover:text-[#eb7c1f] transition-colors duration-300 mb-6 sm:mb-8 group"
         >
-          <svg 
-            xmlns="http://www.w3.org/2000/svg" 
-            fill="none" 
-            viewBox="0 0 24 24" 
-            strokeWidth={2} 
-            stroke="currentColor" 
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={2}
+            stroke="currentColor"
             className="w-5 h-5 transition-transform duration-300 group-hover:-translate-x-1"
           >
             <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
@@ -103,13 +104,13 @@ const page = async ({ params }) => {
 
         <div className="bg-white rounded-2xl sm:rounded-3xl overflow-hidden">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 p-4 sm:p-6 lg:p-10">
-            
+
             <div className="flex justify-center lg:justify-end">
               <div className="relative group w-full max-w-sm">
                 <div className="absolute border-2 border-[#eb7c1f] rounded-2xl blur opacity-25 group-hover:opacity-40 transition duration-300"></div>
                 <div className="relative">
-                  <img 
-                    src={book.coverImage} 
+                  <img
+                    src={book.coverImage}
                     alt={book.title}
                     className="w-full rounded-xl shadow-2xl object-cover aspect-[2/3]"
                   />
@@ -120,9 +121,9 @@ const page = async ({ params }) => {
               </div>
             </div>
 
-         
+
             <div className="flex flex-col justify-center space-y-4 sm:space-y-6">
-              
+
               <div className="inline-flex items-center gap-2 w-fit">
                 <span className="bg-orange-100 text-[#eb7c1f] px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-semibold uppercase tracking-wide">
                   {book.category}
@@ -134,8 +135,8 @@ const page = async ({ params }) => {
               </h1>
 
               <div className="flex items-center gap-3 sm:gap-4">
-                <img 
-                  src={book.authorImg} 
+                <img
+                  src={book.authorImg}
                   alt={book.authorName}
                   className="w-12 h-12 sm:w-14 sm:h-14 rounded-full object-cover border-2 border-orange-200 shadow-md"
                 />
@@ -180,9 +181,12 @@ const page = async ({ params }) => {
                   <span className="text-slate-500 text-sm sm:text-base">USD</span>
                 </div>
 
-                <button className="w-full bg-[#eb7c1f] hover:bg-[#d16d18] text-white font-bold py-3.5 sm:py-4 lg:py-5 rounded-xl sm:rounded-2xl transition-all duration-300 active:scale-95 shadow-lg hover:shadow-xl text-base sm:text-lg lg:text-xl">
-                  Buy Now
-                </button>
+                <Link href={book.downloadLink}>
+                  <button className="cursor-pointer w-full bg-[#eb7c1f] hover:bg-[#d16d18] text-white font-bold py-3.5 sm:py-4 lg:py-5 rounded-xl sm:rounded-2xl transition-all duration-300 active:scale-95 shadow-lg hover:shadow-xl text-base sm:text-lg lg:text-xl">
+                    Read Now
+                  </button>
+                </Link>
+
 
                 <p className="text-slate-500 text-xs sm:text-sm text-center">
                   Instant download after purchase • Published {formatDate(book.createdAt)}
